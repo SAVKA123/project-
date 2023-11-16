@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Квіточки на весь екран</title>
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    #flower {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background-color: pink;
+      border-radius: 50%;
+      transition: transform 0.5s ease-in-out;
+    }
+  </style>
+</head>
+<body>
+  <div id="flower"></div>
+
+  <script>
+    document.addEventListener('click', function (event) {
+      createFlower(event.clientX, event.clientY);
+    });
+
+    function createFlower(x, y) {
+      var flower = document.getElementById('flower').cloneNode(true);
+      document.body.appendChild(flower);
+
+      flower.style.left = x - flower.clientWidth / 2 + 'px';
+      flower.style.top = y - flower.clientHeight / 2 + 'px';
+
+      setTimeout(function () {
+        flower.style.transform = 'scale(2)';
+      }, 10);
+
+      setTimeout(function () {
+        document.body.removeChild(flower);
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
